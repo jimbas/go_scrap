@@ -2,23 +2,35 @@
 
 This is an example how to scrap html using Go
 
-Installation:
-• make sure bin directory exist, if not
-    mkdir bin
-• install gocolly package
-    ./run get github.com/gocolly/colly/...
+## Installation
+1. make sure bin directory exist, if not
+```bash
+mkdir bin
+```
+2. install gocolly package
+```bash
+./run get github.com/gocolly/colly/...
+```
 
-Clean:
+## Clean
+```bash
 ./run -c go_scrap.go
+```
 
-Build:
+## Build
+```bash
 ./run -b go_scrap.go
+```
 
-Run:
+## Run
+```bash
 ./run -r go_scrap.go
+```
 
-Clean, Build & Run:
+## Clean, Build & Run:
+```bash
 ./run -cbr go_scrap.go
+```
 
-Output:
+## Output
 result.csv will be generated.
