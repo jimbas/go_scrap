@@ -1,0 +1,67 @@
+#!/bin/bash
+
+## HOWTO
+# ./go -cbr go_scrap.go 
+
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=${PWD}
+export PATH=$PATH:$GOPATH/bin
+
+THEAPP=$(echo "$2" | cut -f 1 -d '.')
+
+###############################################
+if [[ ${1:0:1} == "-" ]]; then
+###############################################
+
+	## project clean
+	if [[ "$1" == *c* ]]; then
+		echo "cleaning..."
+		go clean "$2"
+		if [ -f bin/$THEAPP ]; then
+			rm bin/$THEAPP
+		fi
+		if [ $? -gt 0 ]; then
+			echo "ERROR! when try to clean"
+			exit 1
+		fi
+	fi
+
+	## project build
+	if [[ "$1" == *b* ]]; then
+		echo "building..."
+		go build -o bin/$THEAPP "$2"
+		if [ $? -gt 0 ]; then
+			echo "ERROR! when try to build"
+			exit 1
+		fi
+	fi
+
+	## project run
+	if [[ "$1" == *r* ]]; then
+		if [ ! -f bin/$THEAPP ]; then
+			echo "binary doesn't exist"
+			exit 1
+		fi
+		echo "running..."
+		./bin/$THEAPP "${@:3}"
+		if [ $? -gt 0 ]; then
+			echo "ERROR! when try to run"
+			exit 1
+		fi
+	fi
+
+	#echo "done"
+
+###############################################
+elif [ "$1" = "get" ]; then
+###############################################
+
+go get -u -v "$2"
+
+###############################################
+else
+###############################################
+	echo "use param please"
+fi
+
