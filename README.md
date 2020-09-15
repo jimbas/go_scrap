@@ -4,7 +4,7 @@ This is an example how to scrap html using Go
 
 Installation:  
 • make sure bin directory exist, if not
-    mkdir bin
+    mkdir bin  
 • install gocolly package
     ./run get github.com/gocolly/colly/...
 
